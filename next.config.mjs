@@ -3,6 +3,15 @@ const nextConfig = {
   /* config options here */
   experimental: {
     agentFeedback: true,
+    images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+       
+      },
+    ],
+  },
   },
   cacheComponents: true,
   partialPrefetching: true,
