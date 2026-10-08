@@ -2,13 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import NavMenu from "./NavMenu";
+import CurrentDate from "./CurrentDate";
 
 const Header = () => {
-  const date = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
+  
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/70 bg-white/95 backdrop-blur-xl">
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="mx-auto w-full max-w-6xl">
         {/* Top Header */}
         <div className="flex items-center justify-between gap-3 px-3 py-3 sm:px-4 sm:py-4 lg:px-6">
           {/* Logo + Brand */}
@@ -35,7 +36,7 @@ const Header = () => {
               </h1>
 
               <p className="mt-0.5 truncate text-[9px] font-medium text-slate-500 sm:text-xs">
-                {date}
+                <CurrentDate/>
               </p>
             </div>
           </Link>
