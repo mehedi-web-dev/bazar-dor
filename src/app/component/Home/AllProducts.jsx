@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AllProducts = async () => {
@@ -36,9 +37,10 @@ const AllProducts = async () => {
           const isDown = product.change?.dir === "down";
 
           return (
-            <article
+            <Link
               key={product.id}
-              className="min-w-0 rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md sm:p-5"
+              href={`/products/${product.slug}`}
+              className="block min-w-0 rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md sm:p-5"
             >
               {/* Product Information */}
               <div className="flex min-w-0 items-center gap-3">
@@ -91,7 +93,7 @@ const AllProducts = async () => {
                   </span>
                 )}
               </div>
-            </article>
+            </Link>
           );
         })}
       </div>

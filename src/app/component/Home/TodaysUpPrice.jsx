@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const TodaysUpPrice = async () => {
@@ -29,10 +30,11 @@ const TodaysUpPrice = async () => {
       {/* Product Grid */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {upPriceProducts.map((product) => (
-          <article
-            key={product.id}
-            className="group rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md"
-          >
+          <Link
+              key={product.id}
+              href={`/products/${product.slug}`}
+              className="block min-w-0 rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md sm:p-5"
+            >
             {/* Product Name and Icon */}
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100">
@@ -74,7 +76,7 @@ const TodaysUpPrice = async () => {
                 ▲ {product.change?.pct}%
               </span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
 
