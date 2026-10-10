@@ -11,19 +11,13 @@ const CategoryDetails = async ({ params }) => {
 
   try {
     const [categoryRes, productRes] = await Promise.all([
-      fetch(
-        "https://api.api-store.workers.dev/api/bazardor/categories",
-        {
-          cache: "force-cache",
-        }
-      ),
+      fetch("https://openapi.programming-hero.com/api/bazardor/categories", {
+        cache: "force-cache",
+      }),
 
-      fetch(
-        "https://api.api-store.workers.dev/api/bazardor/products",
-        {
-          cache: "force-cache",
-        }
-      ),
+      fetch("https://api.api-store.workers.dev/api/bazardor/products", {
+        cache: "force-cache",
+      }),
     ]);
 
     if (categoryRes.ok && productRes.ok) {
