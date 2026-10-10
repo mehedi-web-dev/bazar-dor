@@ -1,10 +1,8 @@
-
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
 
-const formatPrice = (price) =>
-  Number(price).toLocaleString("bn-BD");
+
+const formatPrice = (price) => Number(price).toLocaleString("bn-BD");
 
 const getUnit = (unit) => {
   if (unit === "kg") return "কেজি";
@@ -19,7 +17,7 @@ const ProductDetails = async ({ params }) => {
 
   const res = await fetch(
     "https://api.api-store.workers.dev/api/bazardor/products",
-    { cache: "force-cache" }
+    { cache: "force-cache" },
   );
 
   if (!res.ok) {
@@ -49,16 +47,14 @@ const ProductDetails = async ({ params }) => {
     ? Math.round(
         marketPrices.reduce(
           (sum, market) => sum + (market.min + market.max) / 2,
-          0
-        ) / marketPrices.length
+          0,
+        ) / marketPrices.length,
       )
     : null;
 
   return (
     <main className="min-h-screen bg-[#f0f5f0]">
       <div className="mx-auto w-full max-w-6xl px-3 py-5 sm:px-5 sm:py-6 lg:px-8">
-
-        
         <nav className="mb-6 flex flex-wrap items-center gap-2 text-xs text-slate-600 sm:text-sm">
           <Link href="/" className="hover:text-green-700">
             হোম
@@ -68,12 +64,9 @@ const ProductDetails = async ({ params }) => {
             চাল
           </Link>
           <span>›</span>
-          <span className="font-medium text-slate-800">
-            {product.nameBn}
-          </span>
+          <span className="font-medium text-slate-800">{product.nameBn}</span>
         </nav>
 
-       
         <section className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white/80 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#f0f5f0] text-3xl sm:h-16 sm:w-16">
@@ -133,7 +126,6 @@ const ProductDetails = async ({ params }) => {
           </div>
         </section>
 
-       
         <section className="mt-4 rounded-2xl border border-slate-200 bg-white/80 p-4 sm:mt-5 sm:p-5">
           <h2 className="mb-4 text-base font-bold text-slate-800">
             দামের সারসংক্ষেপ
@@ -177,7 +169,6 @@ const ProductDetails = async ({ params }) => {
             </div>
           </div>
 
-         
           <h2 className="mb-3 mt-6 text-base font-bold text-slate-800">
             বাজারভিত্তিক আজকের দাম
           </h2>
@@ -187,12 +178,8 @@ const ProductDetails = async ({ params }) => {
               <table className="w-full min-w-140 border-collapse text-left text-xs sm:text-sm">
                 <thead className="bg-[#f8faf8] text-slate-600">
                   <tr>
-                    <th className="px-3 py-3 font-semibold sm:px-4">
-                      বাজার
-                    </th>
-                    <th className="px-3 py-3 font-semibold sm:px-4">
-                      বিভাগ
-                    </th>
+                    <th className="px-3 py-3 font-semibold sm:px-4">বাজার</th>
+                    <th className="px-3 py-3 font-semibold sm:px-4">বিভাগ</th>
                     <th className="px-3 py-3 text-right font-semibold sm:px-4">
                       সর্বনিম্ন
                     </th>
@@ -208,7 +195,7 @@ const ProductDetails = async ({ params }) => {
                 <tbody>
                   {marketPrices.map((market, index) => {
                     const marketAverage = Math.round(
-                      (market.min + market.max) / 2
+                      (market.min + market.max) / 2,
                     );
 
                     return (
@@ -253,15 +240,5 @@ const ProductDetails = async ({ params }) => {
 };
 
 export default function ProductsDetailsPage({ params }) {
-  return (
-    <Suspense
-      fallback={
-        <div className="mx-auto max-w-7xl px-4 py-10 text-sm text-slate-500">
-          পণ্যের তথ্য লোড হচ্ছে...
-        </div>
-      }
-    >
-      <ProductDetails params={params} />
-    </Suspense>
-  );
+  return <ProductDetails params={params} />;
 }

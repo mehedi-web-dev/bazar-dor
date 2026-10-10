@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import NavMenu from "./NavMenu";
 import CurrentDate from "./CurrentDate";
+import NavbarAuth from "./NavbarAuth";
 
 const Header = () => {
   
@@ -36,28 +37,17 @@ const Header = () => {
               </h1>
 
               <p className="mt-0.5 truncate text-[9px] font-medium text-slate-500 sm:text-xs">
-                <CurrentDate/>
+                <CurrentDate />
               </p>
             </div>
           </Link>
 
           {/* Auth Buttons */}
           <div className="flex shrink-0 items-center gap-2">
-            {/* Sign In */}
-            <button
-              type="button"
-              className="rounded-lg border border-green-600 px-3 py-2 text-xs font-bold text-green-700 transition-all duration-200 hover:bg-green-50 active:scale-95 sm:px-4 sm:py-2.5 sm:text-sm"
-            >
-              সাইন ইন
-            </button>
+            
+            <NavbarAuth/>
 
-            {/* Sign Up */}
-            <button
-              type="button"
-              className="rounded-lg bg-green-600 px-3 py-2 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:bg-green-700 hover:shadow-md active:scale-95 sm:px-4 sm:py-2.5 sm:text-sm"
-            >
-              সাইন আপ
-            </button>
+            
           </div>
         </div>
 

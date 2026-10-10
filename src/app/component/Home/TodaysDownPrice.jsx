@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React from "react";
+import PriceProductCard from "./PriceProductCard";
 
 const TodaysDownPrice = async () => {
   const res = await fetch(
@@ -21,23 +21,24 @@ const TodaysDownPrice = async () => {
 
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-5 lg:px-6">
+      {/* Section Heading */}
       <h2 className="mb-5 flex items-center gap-2 text-lg font-extrabold text-slate-800 sm:text-xl">
         <span className="text-green-600">▼</span>
         আজ দাম কমেছে
       </h2>
 
+      {/* Product Grid */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {downPriceProducts.map((product) => (
-        <Link
-              key={product.id}
-              href={`/products/${product.slug}`}
-              className="block min-w-0 rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md sm:p-5"
-            >
+          <PriceProductCard
+            key={product.id}
+            product={product}
+            className="block min-w-0 rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md sm:p-5"
+          >
+            {/* Product Name and Icon */}
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-slate-100">
-                <span className="text-2xl">
-                  {product.categoryIcon || product.image || "🛒"}
-                </span>
+                <span className="text-2xl">{product.image}</span>
               </div>
 
               <div className="min-w-0">
@@ -58,6 +59,7 @@ const TodaysDownPrice = async () => {
               </div>
             </div>
 
+            {/* Price and Change */}
             <div className="mt-3 flex items-end justify-between gap-2">
               <div>
                 <p className="text-xs text-slate-500">আজকের দাম</p>
@@ -72,10 +74,11 @@ const TodaysDownPrice = async () => {
                 ▼ {product.change?.pct}%
               </span>
             </div>
-          </Link>
+          </PriceProductCard>
         ))}
       </div>
 
+      {/* Empty State */}
       {downPriceProducts.length === 0 && (
         <p className="rounded-xl border border-slate-200 bg-white p-5 text-center text-sm text-slate-500">
           বর্তমানে দাম কমেছে এমন কোনো পণ্য পাওয়া যায়নি।

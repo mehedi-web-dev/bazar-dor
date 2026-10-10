@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React from "react";
+import PriceProductCard from "./PriceProductCard";
 
 const AllProducts = async () => {
   const res = await fetch(
@@ -37,17 +37,15 @@ const AllProducts = async () => {
           const isDown = product.change?.dir === "down";
 
           return (
-            <Link
+            <PriceProductCard
               key={product.id}
-              href={`/products/${product.slug}`}
+              product={product}
               className="block min-w-0 rounded-2xl border border-slate-200 bg-white/80 p-4 transition-all duration-200 hover:border-green-600 hover:shadow-md sm:p-5"
             >
               {/* Product Information */}
               <div className="flex min-w-0 items-center gap-3">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-100">
-                  <span className="text-3xl">
-                    {product.categoryIcon || product.image || "🛒"}
-                  </span>
+                  <span className="text-3xl">{product.image}</span>
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -93,7 +91,7 @@ const AllProducts = async () => {
                   </span>
                 )}
               </div>
-            </Link>
+            </PriceProductCard>
           );
         })}
       </div>
