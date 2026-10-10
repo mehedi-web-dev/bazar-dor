@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# বাজার দর (Bazar Dor)
 
-## Getting Started
+### Bangladesh Daily Market Price Tracking Website
 
-First, run the development server:
+## 📌 Project Name
+**বাজার দর (Bazar Dor)**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 📝 Short Description
+Bazar Dor is a web application designed to help users explore daily market prices of essential products in Bangladesh. Users can view current prices, compare price changes, browse products by category, and check market-wise minimum, maximum, and average prices. The platform provides a simple and responsive interface to make daily market price information easier to access.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Live Website:** [https://bazar-dor-gamma.vercel.app/](https://bazar-dor-gamma.vercel.app/)
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🛠️ Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js 16** — React framework for building the web application
+- **React 19** — Component-based user interface
+- **Tailwind CSS** — Responsive styling and layout
+- **Better Auth** — Authentication and social login
+- **MongoDB** — Database for authentication data
+- **Google OAuth** — Google sign-in
+- **GitHub OAuth** — GitHub sign-in
+- **Iconify React** — Icon library
+- **React Marquee Text** — Scrolling market information
+- **Vercel** — Deployment and hosting
 
-## Learn More
+## ✨ Key Features
 
-To learn more about Next.js, take a look at the following resources:
+1. **Daily Market Price Tracking**  
+   Explore the current prices of essential products and view their price changes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Price Increase and Decrease Updates**  
+   Quickly identify products whose prices have increased or decreased.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Category-Based Product Browsing**  
+   Browse products by category and view relevant product information.
 
-## Deploy on Vercel
+4. **Detailed Product Price Analysis**  
+   View today's price, yesterday's price comparison, and market-wise minimum, maximum, and average prices where available.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Authentication and Social Login**  
+   Sign up and sign in using email and password, Google, or GitHub.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
