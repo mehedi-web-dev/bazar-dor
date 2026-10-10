@@ -15,6 +15,7 @@ import {
 import { signIn, signUp } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { Icon } from "@iconify/react";
 
 const Page = () => {
   const [loading, setLoading] = useState(false);
@@ -73,7 +74,7 @@ const Page = () => {
 
       // Toast দেখানোর জন্য redirect-এর আগে সামান্য সময়
       setTimeout(() => {
-        window.location.assign("/");
+        router.push("/");
       }, 1200);
     } catch (error) {
       toast.error(
@@ -107,8 +108,8 @@ const Page = () => {
   };
 
   return (
-    <main className="min-h-screen bg-[#f0f5f0] px-4 py-12 text-[#26352b]">
-      <div className="mx-auto w-full max-w-82.5">
+    <main className="min-h-screen bg-[#f0f5f0] px-4 py-12 text-[#26352b] ">
+      <div className="mx-auto w-full max-w-6xl justify-center items-center flex flex-col ">
         {/* Header */}
         <header className="mb-6 text-center">
           <h1 className="text-2xl font-bold tracking-tight">
@@ -121,7 +122,7 @@ const Page = () => {
         </header>
 
         {/* Signup Form */}
-        <div className="rounded-[14px] border border-[#dfe8df] bg-[#fbfcfb] p-5 shadow-sm">
+        <div className="rounded-[14px] w-full sm:w-2xl justify-center items-center border border-[#dfe8df] bg-[#fbfcfb] p-5 shadow-sm ">
           <Form onSubmit={onSubmit}>
             <FieldGroup className="gap-3">
               {/* Name */}
@@ -134,7 +135,9 @@ const Page = () => {
                     : null
                 }
               >
-                <Label className="mb-1 block text-xs font-medium">নাম</Label>
+                <Label className="mb-1 mt-1 block text-xs font-medium">
+                  নাম
+                </Label>
 
                 <Input
                   placeholder="যেমন: রহিম উদ্দিন"
@@ -146,7 +149,9 @@ const Page = () => {
 
               {/* Email */}
               <TextField name="email" type="email" isRequired>
-                <Label className="mb-1 block text-xs font-medium">ইমেইল</Label>
+                <Label className="mb-1 mt-1 block text-xs font-medium">
+                  ইমেইল
+                </Label>
 
                 <Input
                   placeholder="you@example.com"
@@ -158,7 +163,7 @@ const Page = () => {
 
               {/* Password */}
               <TextField name="password" type="password" isRequired>
-                <Label className="mb-1 block text-xs font-medium">
+                <Label className="mb-1 mt-1 block text-xs font-medium">
                   পাসওয়ার্ড
                 </Label>
 
@@ -172,7 +177,7 @@ const Page = () => {
 
               {/* Confirm Password */}
               <TextField name="confirmPassword" type="password" isRequired>
-                <Label className="mb-1 block text-xs font-medium">
+                <Label className="mb-1 mt-1 block text-xs font-medium">
                   পাসওয়ার্ড নিশ্চিত করুন
                 </Label>
 
@@ -205,16 +210,15 @@ const Page = () => {
           </div>
 
           {/* Social Login */}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 ">
             <Button
               type="button"
               variant="secondary"
               isDisabled={loading || !!socialLoading}
-              className="h-9 rounded-md border border-[#e0e8e0] bg-transparent px-2 text-[11px] font-medium hover:bg-gray-100"
+              className="h-9 w-full rounded-md border border-[#e0e8e0] bg-transparent px-2 text-[11px] font-medium hover:bg-gray-100"
               onPress={() => handleSocialSignIn("google")}
             >
-              <span className="font-bold text-blue-600">G</span>
-
+              <Icon icon="devicon:google" />
               {socialLoading === "google"
                 ? "অপেক্ষা করুন..."
                 : "Google দিয়ে চালিয়ে যান"}
@@ -224,11 +228,10 @@ const Page = () => {
               type="button"
               variant="secondary"
               isDisabled={loading || !!socialLoading}
-              className="h-9 rounded-md border border-[#e0e8e0] bg-transparent px-2 text-[11px] font-medium hover:bg-gray-100"
+              className="h-9 w-full rounded-md border border-[#e0e8e0] bg-transparent px-2 text-[11px] font-medium hover:bg-gray-100"
               onPress={() => handleSocialSignIn("github")}
             >
-              <span className="font-bold">●</span>
-
+              <Icon icon="mdi:github" />
               {socialLoading === "github"
                 ? "অপেক্ষা করুন..."
                 : "GitHub দিয়ে চালিয়ে যান"}
@@ -238,12 +241,12 @@ const Page = () => {
           {/* Sign In Link */}
           <p className="mt-4 text-center text-xs text-gray-600">
             অ্যাকাউন্ট আছে?{" "}
-            <a
+            <Link
               href="/sign-in"
               className="font-medium text-green-700 hover:underline"
             >
               সাইন ইন করুন
-            </a>
+            </Link>
           </p>
         </div>
 

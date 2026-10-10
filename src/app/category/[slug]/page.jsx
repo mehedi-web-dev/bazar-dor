@@ -15,7 +15,7 @@ const CategoryDetails = async ({ params }) => {
         cache: "force-cache",
       }),
 
-      fetch("https://api.api-store.workers.dev/api/bazardor/products", {
+      fetch("https://openapi.programming-hero.com/api/bazardor/products", {
         cache: "force-cache",
       }),
     ]);

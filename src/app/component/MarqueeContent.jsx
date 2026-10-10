@@ -5,7 +5,7 @@ import MarqueeText from "react-marquee-text";
 const MarqueeContent = ({ data }) => {
   return (
     <div className="w-full overflow-hidden border-y border-slate-200 bg-white">
-      <MarqueeText direction="right"> 
+      <MarqueeText direction="right" > 
         <div className="flex items-center">
           {data.map((product) => {
             const isUp = product.change?.dir === "up";

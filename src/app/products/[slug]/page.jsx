@@ -94,7 +94,7 @@ const ProductDetails = async ({ params }) => {
         <section className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white/80 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div className="flex min-w-0 items-center gap-3 sm:gap-4">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#f0f5f0] text-3xl sm:h-16 sm:w-16">
-              {product.categoryIcon || product.image || "🛒"}
+              { product.image || "🛒"}
             </div>
 
             <div className="min-w-0">
