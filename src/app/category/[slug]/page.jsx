@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+
 import CategoryProductList from "@/app/component/CategoryProductList";
 
 const CategoryDetails = async ({ params }) => {
@@ -12,10 +13,7 @@ const CategoryDetails = async ({ params }) => {
       "https://api.api-store.workers.dev/api/bazardor/categories",
       { cache: "force-cache" }
     ),
-    fetch(
-      "https://api.api-store.workers.dev/api/bazardor/products",
-      { cache: "force-cache" }
-    ),
+   
   ]);
 
   if (!categoryRes.ok || !productRes.ok) {
