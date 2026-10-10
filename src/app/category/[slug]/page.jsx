@@ -1,27 +1,50 @@
 
 import Link from "next/link";
 import { notFound } from "next/navigation";
-
-
 import CategoryProductList from "@/app/component/CategoryProductList";
 
 const CategoryDetails = async ({ params }) => {
   const { slug } = await params;
 
-  const [categoryRes, productRes] = await Promise.all([
-    fetch(
-      "https://api.api-store.workers.dev/api/bazardor/categories",
-      { cache: "force-cache" }
-    ),
-   
-  ]);
+  let categories = [];
+  let products = [];
 
-  if (!categoryRes.ok || !productRes.ok) {
-    throw new Error("Failed to fetch category data");
+  try {
+    const [categoryRes, productRes] = await Promise.all([
+      fetch(
+        "https://api.api-store.workers.dev/api/bazardor/categories",
+        {
+          cache: "force-cache",
+        }
+      ),
+
+      fetch(
+        "https://api.api-store.workers.dev/api/bazardor/products",
+        {
+          cache: "force-cache",
+        }
+      ),
+    ]);
+
+    if (categoryRes.ok && productRes.ok) {
+      const [categoryData, productData] = await Promise.all([
+        categoryRes.json(),
+        productRes.json(),
+      ]);
+
+      categories = Array.isArray(categoryData) ? categoryData : [];
+      products = Array.isArray(productData) ? productData : [];
+    } else {
+      console.error(
+        "Category API status:",
+        categoryRes.status,
+        "Product API status:",
+        productRes.status
+      );
+    }
+  } catch (error) {
+    console.error("Category page API error:", error);
   }
-
-  const categories = await categoryRes.json();
-  const products = await productRes.json();
 
   const category = categories.find(
     (item) => item.slug === slug
@@ -38,10 +61,15 @@ const CategoryDetails = async ({ params }) => {
   return (
     <main className="min-h-screen bg-[#f0f5f0]">
       <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-5 lg:px-6">
-
         {/* Breadcrumb */}
-        <nav className="mb-5 flex flex-wrap items-center gap-2 text-xs text-slate-500 sm:text-sm">
-          <Link href="/" className="transition hover:text-green-700">
+        <nav
+          aria-label="Breadcrumb"
+          className="mb-5 flex flex-wrap items-center gap-2 text-xs text-slate-500 sm:text-sm"
+        >
+          <Link
+            href="/"
+            className="transition hover:text-green-700"
+          >
             হোম
           </Link>
 
@@ -52,7 +80,7 @@ const CategoryDetails = async ({ params }) => {
           </span>
         </nav>
 
-        {/* Category header */}
+        {/* Category Header */}
         <section className="mb-6 rounded-2xl border border-slate-200 bg-white/80 p-5 sm:p-7">
           <div className="flex items-center gap-4">
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#f0f5f0] text-3xl">
@@ -72,9 +100,8 @@ const CategoryDetails = async ({ params }) => {
           </div>
         </section>
 
-        {/* Sorting and product cards */}
+        {/* Product List */}
         <CategoryProductList products={categoryProducts} />
-
       </div>
     </main>
   );
