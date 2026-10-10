@@ -1,18 +1,29 @@
+
 import CategoryLink from "./CategoryLink";
 
 const NavMenu = async () => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/categories",
-    {
-      cache: "force-cache",
-    },
-  );
+  let data = [];
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch categories");
+  try {
+    const res = await fetch(
+      "https://api.api-store.workers.dev/api/bazardor/categories",
+      {
+        cache: "force-cache",
+      }
+    );
+
+    if (res.ok) {
+      const result = await res.json();
+      data = Array.isArray(result) ? result : [];
+    } else {
+      console.error(
+        "Failed to fetch categories:",
+        res.status
+      );
+    }
+  } catch (error) {
+    console.error("Category API error:", error);
   }
-
-  const data = await res.json();
 
   return (
     <nav
@@ -31,3 +42,4 @@ const NavMenu = async () => {
 };
 
 export default NavMenu;
+
