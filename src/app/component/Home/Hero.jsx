@@ -4,7 +4,7 @@ import CurrentDate from "../CurrentDate";
 
 const Hero = () => {
   return (
-    <section className="px-3 pt-4 sm:px-5 sm:pt-5 lg:px-8">
+    <section className="px-3  pt-4 sm:px-0 sm:pt-5  ">
       <div className="mx-auto flex max-w-6xl flex-col-reverse items-center overflow-hidden rounded-2xl border border-slate-200 bg-white px-5 py-5 sm:rounded-[24px] sm:px-7 sm:py-7 md:flex-row md:justify-between md:px-8 lg:px-10">
         {/* Left Content */}
         <div className="w-full text-center md:max-w-2xl md:text-left">
@@ -27,7 +27,7 @@ const Hero = () => {
           {/* Button */}
           <div className="mt-5 sm:mt-6">
             <Link
-              href="/"
+              href="/#products"
               className="inline-flex rounded-lg bg-green-600 px-5 py-2.5 text-xs font-bold text-white shadow-md shadow-green-600/20 transition hover:bg-green-700 active:scale-95 sm:px-6 sm:py-3 sm:text-sm"
             >
               সব পণ্য দেখুন

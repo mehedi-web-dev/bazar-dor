@@ -25,7 +25,7 @@ const AllProducts = async () => {
   return (
     <section
       id="products"
-      className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-5 lg:px-6"
+      className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-0"
     >
       {/* Heading */}
       <div className="mb-5">
@@ -55,9 +55,7 @@ const AllProducts = async () => {
                 {/* Product Information */}
                 <div className="flex min-w-0 items-center gap-3">
                   <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-slate-100">
-                    <span className="text-3xl">
-                      {product.image || "🛒"}
-                    </span>
+                    <span className="text-3xl">{product.image || "🛒"}</span>
                   </div>
 
                   <div className="min-w-0 flex-1">
@@ -81,15 +79,11 @@ const AllProducts = async () => {
                 {/* Current Price */}
                 <div className="mt-4 flex items-end justify-between gap-2">
                   <div>
-                    <p className="text-sm text-slate-500">
-                      আজকের দাম
-                    </p>
+                    <p className="text-sm text-slate-500">আজকের দাম</p>
 
                     <p className="mt-1 text-xl font-extrabold text-slate-900">
-                      {product.today}{" "}
-                      <span className="text-base font-medium">
-                        টাকা
-                      </span>
+                      {Number(product.today).toLocaleString("bn-BD")}{" "}
+                      <span className="text-base font-medium">টাকা</span>
                     </p>
                   </div>
 
@@ -104,7 +98,11 @@ const AllProducts = async () => {
                       }`}
                     >
                       {isUp ? "▲" : isDown ? "▼" : "●"}{" "}
-                      {product.change.pct}%
+                      {Number(product.change.pct).toLocaleString("bn-BD", {
+                        minimumFractionDigits: 1,
+                        maximumFractionDigits: 2,
+                      })}
+                      %
                     </span>
                   )}
                 </div>

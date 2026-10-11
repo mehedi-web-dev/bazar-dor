@@ -1,6 +1,9 @@
+
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   Button,
   Description,
@@ -11,18 +14,20 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-
+import { Icon } from "@iconify/react";
 import { signIn, signUp } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import Link from "next/link";
-import { Icon } from "@iconify/react";
 
 const Page = () => {
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
   const [socialLoading, setSocialLoading] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (loading || socialLoading) return;
 
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -30,7 +35,8 @@ const Page = () => {
     const name = formData.get("name")?.toString().trim() ?? "";
     const email = formData.get("email")?.toString().trim() ?? "";
     const password = formData.get("password")?.toString() ?? "";
-    const confirmPassword = formData.get("confirmPassword")?.toString() ?? "";
+    const confirmPassword =
+      formData.get("confirmPassword")?.toString() ?? "";
 
     // Validation
     if (name.length < 3) {
@@ -63,8 +69,10 @@ const Page = () => {
         callbackURL: "/",
       });
 
-      if (result.error) {
-        toast.error(result.error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।");
+      if (result?.error) {
+        toast.error(
+          result.error.message || "অ্যাকাউন্ট তৈরি করা যায়নি।"
+        );
         return;
       }
 
@@ -72,23 +80,26 @@ const Page = () => {
 
       form.reset();
 
-      // Toast দেখানোর জন্য redirect-এর আগে সামান্য সময়
-      setTimeout(() => {
-        router.push("/");
-      }, 1200);
+      
+      router.replace("/");
+      router.refresh();
     } catch (error) {
+      console.error("Signup error:", error);
+
       toast.error(
         error instanceof Error
           ? error.message
-          : "রেজিস্ট্রেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।",
+          : "রেজিস্ট্রেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।"
       );
     } finally {
       setLoading(false);
     }
   };
 
-  // Google and GitHub sign-in
+  // Google and GitHub authentication
   const handleSocialSignIn = async (provider) => {
+    if (loading || socialLoading) return;
+
     try {
       setSocialLoading(provider);
 
@@ -98,18 +109,25 @@ const Page = () => {
       });
 
       if (result?.error) {
-        toast.error(result.error.message || "Social sign-in শুরু করা যায়নি।");
+        toast.error(
+          result.error.message ||
+            "Social sign-in শুরু করা যায়নি।"
+        );
+        setSocialLoading("");
       }
-    } catch {
+
+      
+    } catch (error) {
+      console.error(`${provider} sign-in error:`, error);
+
       toast.error("Social sign-in ব্যর্থ হয়েছে। আবার চেষ্টা করুন।");
-    } finally {
       setSocialLoading("");
     }
   };
 
   return (
-    <main className="min-h-screen bg-[#f0f5f0] px-4 py-12 text-[#26352b] ">
-      <div className="mx-auto w-full max-w-6xl justify-center items-center flex flex-col ">
+    <main className="min-h-screen bg-[#f0f5f0] px-4 py-12 text-[#26352b]">
+      <div className="mx-auto flex w-full max-w-6xl flex-col items-center justify-center">
         {/* Header */}
         <header className="mb-6 text-center">
           <h1 className="text-2xl font-bold tracking-tight">
@@ -122,7 +140,7 @@ const Page = () => {
         </header>
 
         {/* Signup Form */}
-        <div className="rounded-[14px] w-full sm:w-2xl justify-center items-center border border-[#dfe8df] bg-[#fbfcfb] p-5 shadow-sm ">
+        <div className="w-full rounded-[14px] border border-[#dfe8df] bg-[#fbfcfb] p-5 shadow-sm sm:max-w-2xl">
           <Form onSubmit={onSubmit}>
             <FieldGroup className="gap-3">
               {/* Name */}
@@ -148,7 +166,11 @@ const Page = () => {
               </TextField>
 
               {/* Email */}
-              <TextField name="email" type="email" isRequired>
+              <TextField
+                name="email"
+                type="email"
+                isRequired
+              >
                 <Label className="mb-1 mt-1 block text-xs font-medium">
                   ইমেইল
                 </Label>
@@ -162,7 +184,11 @@ const Page = () => {
               </TextField>
 
               {/* Password */}
-              <TextField name="password" type="password" isRequired>
+              <TextField
+                name="password"
+                type="password"
+                isRequired
+              >
                 <Label className="mb-1 mt-1 block text-xs font-medium">
                   পাসওয়ার্ড
                 </Label>
@@ -176,7 +202,11 @@ const Page = () => {
               </TextField>
 
               {/* Confirm Password */}
-              <TextField name="confirmPassword" type="password" isRequired>
+              <TextField
+                name="confirmPassword"
+                type="password"
+                isRequired
+              >
                 <Label className="mb-1 mt-1 block text-xs font-medium">
                   পাসওয়ার্ড নিশ্চিত করুন
                 </Label>
@@ -196,7 +226,9 @@ const Page = () => {
               isDisabled={loading || !!socialLoading}
               className="mt-3 h-9 w-full rounded-md bg-[#078b43] text-xs font-semibold text-white shadow-md hover:bg-[#067638]"
             >
-              {loading ? "অ্যাকাউন্ট তৈরি হচ্ছে..." : "অ্যাকাউন্ট তৈরি করুন"}
+              {loading
+                ? "অ্যাকাউন্ট তৈরি হচ্ছে..."
+                : "অ্যাকাউন্ট তৈরি করুন"}
             </Button>
           </Form>
 
@@ -210,7 +242,7 @@ const Page = () => {
           </div>
 
           {/* Social Login */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 ">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <Button
               type="button"
               variant="secondary"

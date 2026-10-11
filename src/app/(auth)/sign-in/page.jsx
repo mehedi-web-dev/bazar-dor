@@ -46,7 +46,7 @@ const SignInPage = () => {
       });
 
       if (result.error) {
-        toast.error(result.error.message || "ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।");
+        toast.error("ইমেইল অথবা পাসওয়ার্ড সঠিক নয়।");
         return;
       }
 

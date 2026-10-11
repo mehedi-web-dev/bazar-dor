@@ -5,7 +5,7 @@ import MarqueeText from "react-marquee-text";
 const MarqueeContent = ({ data }) => {
   return (
     <div className="w-full overflow-hidden border-y border-slate-200 bg-white">
-      <MarqueeText direction="right" > 
+      <MarqueeText direction="right" >
         <div className="flex items-center">
           {data.map((product) => {
             const isUp = product.change?.dir === "up";
@@ -34,7 +34,12 @@ const MarqueeContent = ({ data }) => {
                       : "font-semibold text-red-500"
                   }
                 >
-                  {isUp ? "▲" : "▼"} {product.change?.pct}%
+                  {isUp ? "▲" : "▼"}{" "}
+                  {Number(product.change?.pct).toLocaleString("bn-BD", {
+                    minimumFractionDigits: 1,
+                    maximumFractionDigits: 2,
+                  })}
+                  %
                 </span>
               </div>
             );

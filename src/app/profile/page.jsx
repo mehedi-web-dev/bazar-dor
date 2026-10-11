@@ -42,7 +42,7 @@ function ProfileForm({ user, onUpdate, updating, signingOut }) {
           <Input
             placeholder="আপনার নাম লিখুন"
             autoComplete="name"
-            className="h-11 w-full rounded-lg border border-[#dfe8df] bg-transparent px-3 text-sm outline-none focus:border-green-600"
+            className="h-11 w-full mb-2 rounded-lg border border-[#dfe8df] bg-transparent px-3 text-sm outline-none focus:border-green-600"
           />
 
           <FieldError />
@@ -51,7 +51,7 @@ function ProfileForm({ user, onUpdate, updating, signingOut }) {
         <Button
           type="submit"
           isDisabled={updating || signingOut}
-          className="mt-1 h-11 w-full rounded-lg bg-[#078b43] text-sm font-semibold text-white shadow-md hover:bg-[#067638]"
+          className="mt-2 h-11 w-full rounded-lg  bg-[#078b43] text-sm font-semibold text-white shadow-md hover:bg-[#067638]"
         >
           {updating ? "আপডেট হচ্ছে..." : "আপডেট"}
         </Button>

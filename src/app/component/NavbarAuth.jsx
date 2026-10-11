@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSession, authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import Image from "next/image";
 
 const NavbarAuth = () => {
   const { data: session, isPending } = useSession();
@@ -64,10 +65,10 @@ const NavbarAuth = () => {
         type="button"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
-        className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-gray-100"
+        className="flex items-center cursor-pointer gap-2 rounded-lg px-2 py-1.5 hover:bg-gray-100"
       >
         {user.image ? (
-          <img
+          <Image
             src={user.image}
             alt={user.name || "User"}
             className="h-10 w-10 rounded-full object-cover"
@@ -90,7 +91,7 @@ const NavbarAuth = () => {
           <button
             type="button"
             aria-label="Close menu"
-            className="fixed inset-0 z-40 cursor-default"
+            className="fixed inset-0 z-40 cursor-pointer"
             onClick={() => setDropdownOpen(false)}
           />
 
@@ -118,7 +119,7 @@ const NavbarAuth = () => {
               type="button"
               disabled={signingOut}
               onClick={handleSignOut}
-              className="flex w-full items-center gap-2 rounded-lg px-2 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 disabled:opacity-50"
+              className="flex w-full items-center cursor-pointer gap-2 rounded-lg px-2 py-2.5 text-left text-sm text-red-600 hover:bg-red-50 disabled:opacity-50"
             >
               <span>↪</span>
               {signingOut ? "সাইন আউট হচ্ছে..." : "সাইন আউট"}
