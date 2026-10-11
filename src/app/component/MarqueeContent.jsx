@@ -22,7 +22,7 @@ const MarqueeContent = ({ data }) => {
                 </span>
 
                 <span className="font-semibold text-slate-800">
-                  {product.today} টাকা
+                  {Number(product.today).toLocaleString("bn-BD")} টাকা
                 </span>
 
                 <span className="text-slate-500">/{product.unit}</span>
